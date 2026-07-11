@@ -1,0 +1,673 @@
+/* =========================================
+   BIO-DIGITAL SYNTHESIS - ÉDITION RESPONSABLE
+   Design : Naturel, Chaleureux, Professionnel
+   ========================================= */
+
+:root {
+    /* Palette "Responsable & Apaisante" */
+    /* Fond : Beige Sable (doux, moins agressif que le blanc) */
+    --bg-body: #FDFCF8; 
+    --bg-section: #FFFFFF;
+    --bg-accent: #F3F0E7; /* Beige plus foncé pour les contrastes */
+
+    /* Couleurs Principales */
+    --primary: #2C5F4F;   /* Vert Forêt Profond (Santé, Nature, Confiance) */
+    --primary-dark: #1A3D33; /* Vert très sombre pour les titres */
+    
+    --accent: #C78B68;    /* Terracotta Doux (Chaleur, Humanité, Tech) */
+    --accent-light: #E8D0C3; /* Version claire du terracotta */
+    
+    --text-main: #2D3748; /* Gris Anthracite (Lisible, moins dur que le noir) */
+    --text-light: #5A6778; /* Gris chaud pour les paragraphes */
+    
+    /* Ombres et Bordures */
+    --shadow-sm: 0 2px 8px rgba(44, 95, 79, 0.08);
+    --shadow-md: 0 8px 24px rgba(44, 95, 79, 0.12);
+    --shadow-lg: 0 16px 48px rgba(44, 95, 79, 0.15);
+    
+    --radius: 16px; /* Arrondi moderne et organique */
+    
+    /* Typographie */
+    --font-display: 'Playfair Display', serif; /* Élégance naturelle */
+    --font-body: 'Inter', sans-serif;          /* Modernité lisible */
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--primary-dark);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h1 { font-size: 3.5rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+h2 { 
+    font-size: 2.5rem; 
+    margin-bottom: 1rem; 
+    position: relative; 
+    display: inline-block;
+    color: var(--primary);
+}
+h2::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    background: var(--accent); /* Ligne de soulignement Terracotta */
+    margin: 0.8rem auto 0;
+    border-radius: 2px;
+}
+h3 { font-size: 1.5rem; margin-bottom: 0.8rem; color: var(--primary-dark); }
+p { color: var(--text-light); font-size: 1.125rem; margin-bottom: 1.5rem; }
+
+a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Boutons --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    border-radius: 50px; /* Boutons arrondis, organiques */
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-block { width: 100%; }
+
+/* --- Header --- */
+header {
+    background-color: rgba(253, 252, 248, 0.95); /* Beige très léger avec transparence */
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--bg-accent);
+    padding: 1.2rem 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.logo span { color: var(--accent); } /* Le "Synthesis" en Terracotta */
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-light);
+    font-size: 1rem;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent); /* Soulignement Terracotta */
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* --- Hero Section --- */
+.hero {
+    padding: 8rem 0 6rem;
+    background: linear-gradient(to bottom, var(--bg-body), var(--bg-accent));
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    color: var(--primary-dark);
+}
+
+.hero-content .subtitle {
+    font-size: 1.25rem;
+    color: var(--accent); /* Terracotta pour le contraste */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.quote-box {
+    background-color: #FFFFFF;
+    border-left: 5px solid var(--primary); /* Bordure Vert Forêt */
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    border-radius: 0 12px 12px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.quote-box cite {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-style: normal;
+    font-weight: 600;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+/* Visuel Hero : Formes organiques colorées */
+.hero-visual {
+    position: relative;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E8F5E9, #FFF3E0); /* Dégradé Vert clair vers Beige */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    animation: morph 12s infinite ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 60px rgba(44, 95, 79, 0.1);
+    position: relative;
+}
+
+/* Cercles de couleur à l'intérieur de la forme */
+.hero-shape::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(30px);
+    top: 20%;
+    left: 20%;
+}
+
+.hero-shape::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(25px);
+    bottom: 20%;
+    right: 20%;
+}
+
+@keyframes morph {
+    0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+/* --- Expertises --- */
+.expertises {
+    padding: 6rem 0;
+    background-color: var(--bg-section);
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.card-expertise {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--bg-accent);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-expertise::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.card-expertise:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.icon-box {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    /* Les émojis prennent les couleurs du texte, mais on peut ajouter un filtre si besoin */
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--bg-accent);
+    border-radius: 4px;
+    margin: 1.5rem 0 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 4px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.level {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- Arsenal Digital --- */
+.arsenal {
+    padding: 6rem 0;
+    background-color: #F9F7F2; /* Beige très léger */
+}
+
+.arsenal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.arsenal-section h3 {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tag {
+    background: #FFFFFF;
+    border: 1px solid #E2E8D0; /* Bordure vert très pâle */
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.tag.soft-tag {
+    border-color: #E0D0C3; /* Bordure beige */
+    color: var(--text-main);
+}
+
+.tag.soft-tag:hover {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+/* --- Projets --- */
+.projects {
+    padding: 6rem 0;
+    background-color: var(--bg-section);
+}
+
+.project-highlight {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 5rem;
+    background: #FFFFFF;
+    border-radius: var(--radius);
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--bg-accent);
+}
+
+.badge {
+    background-color: #E8F5E9; /* Fond vert très pâle */
+    color: var(--primary);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+ /* =========================================
+   FOOTER ANIMÉ & PREMIUM - FINAL
+   ========================================= */
+
+footer {
+    background: linear-gradient(135deg, #1a3d33 0%, #2c5f4f 100%); /* Dégradé Vert Forêt */
+    color: #ffffff;
+    padding: 4rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid #c78b68; /* Ligne Terracotta en haut */
+    margin-top: 6rem;
+    font-family: 'Inter', sans-serif; /* Assure-toi que la police est chargée */
+}
+
+/* Effet de lumière subtile en arrière-plan (rotation lente) */
+footer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+    animation: rotateLight 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes rotateLight {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 3rem;
+}
+
+.footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #c78b68; /* Terracotta */
+    transition: width 0.4s ease;
+    border-radius: 2px;
+}
+
+.footer-col:hover h4::after {
+    width: 100%; /* Ligne qui s'étend au survol de la colonne */
+}
+
+.footer-col p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.footer-col a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: #c78b68; /* Terracotta au survol */
+}
+
+/* Liste de liens de navigation */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-links li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #c78b68;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    transition: transform 0.3s ease;
+}
+
+.footer-links li:hover {
+    transform: translateX(6px);
+}
+
+.footer-links li:hover::before {
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+.footer-links a:hover {
+    color: #c78b68;
+}
+
+/* Icônes sociales */
+.social-icons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.social-icons a:hover {
+    background: #c78b68; /* Terracotta */
+    color: #ffffff;
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 6px 15px rgba(199, 139, 104, 0.4);
+    border-color: #c78b68;
+}
+
+/* Barre du bas */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.3rem 0;
+}
+
+.footer-bottom a {
+    color: #c78b68;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Animation d'apparition du footer au scroll */
+footer {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive : Empilement sur mobile */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-col h4 {
+        font-size: 1.3rem;
+    }
+    
+    .social-icons {
+        justify-content: flex-start;
+    }
+}
